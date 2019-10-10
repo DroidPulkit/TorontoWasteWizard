@@ -15,8 +15,8 @@
     <string name="register">Register</string>
     <string name="back_to_login">Back To Login</string>
     <string name="blue_bin">Blue Bin</string>
-    <string name="coffee_cup_lid">Coffee Cup lid</string>
     <string name="description">Description</string>
+    <string name="coffee_cup_lid">Coffee Cup lid</string>
 
 
 </resources>
