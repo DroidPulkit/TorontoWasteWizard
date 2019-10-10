@@ -7,3 +7,6 @@ Not only, can we search for everyday things here to Recycle, but also save them 
 Types of bin we usually see around are :- Black Bin, Green Bin, Blue Bin
 
 Try the app out on [Play Store](https://play.google.com/store/apps/details?id=pulkit.com.torontowastewizard)
+
+
+![](https://media.giphy.com/media/QsJJAJR9PbjV6uqjig/giphy.gif)
