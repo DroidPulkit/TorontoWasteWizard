@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Favourite" android:id="@+id/menu_fav" app:showAsAction="always" android:icon="@drawable/fav_selected"/>
+    <item android:title="Logout" android:id="@+id/menu_logout" app:showAsAction="always" android:icon="@drawable/logout"/>
+
+
+</menu>

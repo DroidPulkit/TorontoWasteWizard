@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item_img">
+        <bitmap android:src="@drawable/great_city_overall" />
+    </item>
+    <item android:id="@+id/background">
+        <shape android:shape="rectangle">
+            <!--This is how we define an alpha in color:
+            The color scheme is like this
+            #AARRGGBB there A stands for alpha channel,
+            R stands for red, G for green and B for blue.-->
+            <solid android:color="#88000000" />
+        </shape>
+    </item>
+</layer-list>
