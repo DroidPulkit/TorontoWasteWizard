@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -20,15 +21,16 @@ import org.json.JSONObject
 import java.util.HashMap
 
 import pulkit.com.torontowastewizard.R
+import pulkit.com.torontowastewizard.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var username: EditText
-    lateinit var email: EditText
-    lateinit var password: EditText
-    lateinit var zip: EditText
-    lateinit var register: Button
-    lateinit var goBack: TextView
+    companion object {
+        private val TAG: String = RegisterActivity::class.java.simpleName
+    }
+
+    private lateinit var binding: ActivityRegisterBinding
+
     internal var strEmail = ""
     internal var strPassword = ""
     internal var strUsername = ""
@@ -36,22 +38,13 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        username = findViewById(R.id.editTextUserName)
-        email = findViewById(R.id.editTextEmail)
-        password = findViewById(R.id.editTextPassword)
-        zip = findViewById(R.id.editTextZipCode)
-
-        register = findViewById(R.id.buttonRegister)
-        goBack = findViewById(R.id.textViewLogin)
-
-        register.setOnClickListener(this)
-        goBack.setOnClickListener(this)
-
-
+        binding.buttonRegister.setOnClickListener(this)
+        binding.textViewLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -71,14 +64,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    internal fun extractData() {
-        strEmail = email.text.toString()
-        strPassword = password.text.toString()
-        strUsername = username.text.toString()
-        strZip = zip.text.toString()
+    private fun extractData() {
+        strEmail = binding.editTextEmail.text.toString()
+        strPassword = binding.editTextPassword.text.toString()
+        strUsername = binding.editTextUserName.text.toString()
+        strZip = binding.editTextZipCode.text.toString()
     }
 
-    internal fun dataValidOrNot(): Boolean {
+    private fun dataValidOrNot(): Boolean {
         var validity = true
 
         if (strUsername.isEmpty()) {
@@ -96,7 +89,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         return validity
     }
 
-    internal fun callServer() {
+    private fun callServer() {
 
         val queue = Volley.newRequestQueue(this)
 
@@ -108,7 +101,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 val jsonObject = JSONObject(response)
                 val success = jsonObject.getString("success")
                 if (success == "1") {
-                    //Register Successfull
+                    //Register Successful
                     Toast.makeText(this@RegisterActivity, "Registered Successfully", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
@@ -144,10 +137,5 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         queue.add(postRequest)
 
 
-    }
-
-    companion object {
-
-        private val TAG = RegisterActivity::class.java.simpleName
     }
 }
