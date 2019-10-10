@@ -17,4 +17,7 @@
     <string name="waste_management_system">Système de gestion des déchets</string>
     <string name="waste_name">Nom du déchet</string>
     <string name="zip_code">Code postal</string>
+    <string name="data_not_valid">Données non valides</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="registered_failed">Registration failed, used same email address before</string>
 </resources>
