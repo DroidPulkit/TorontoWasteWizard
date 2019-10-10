@@ -2,7 +2,7 @@ package pulkit.com.torontowastewizard.activity
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,7 +22,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        binding = DataBindingUtil.setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
+
+        //binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 

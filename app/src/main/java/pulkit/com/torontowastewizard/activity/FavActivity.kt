@@ -1,11 +1,10 @@
 package pulkit.com.torontowastewizard.activity
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.WindowManager
 import java.util.ArrayList
 import pulkit.com.torontowastewizard.adapter.FavWasteAdapter

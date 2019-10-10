@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.WindowManager
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import java.util.ArrayList
 import pulkit.com.torontowastewizard.adapter.WasteAdapter
 import pulkit.com.torontowastewizard.model.Waste

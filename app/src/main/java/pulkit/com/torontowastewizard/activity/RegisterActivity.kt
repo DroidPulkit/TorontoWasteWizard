@@ -2,13 +2,10 @@ package pulkit.com.torontowastewizard.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import android.databinding.DataBindingUtil
-import org.json.JSONObject
-import java.util.HashMap
+import androidx.databinding.DataBindingUtil
 import pulkit.com.torontowastewizard.R
 import pulkit.com.torontowastewizard.databinding.ActivityRegisterBinding
 
