@@ -9,15 +9,13 @@
     <string name="back_to_login">Back To Login</string>
     <string name="data_not_valid">Data not valid</string>
     <string name="registered_successfully">Registered Successfully</string>
-    <string name="registered_failed">Registeration failed, used same email address before</string>
+    <string name="registered_failed">Registration failed, used same email address before</string>
     <string name="waste_management_system">Waste Management System</string>
     <string name="waste_name">Waste Name</string>
     <string name="submit">Submit</string>
     <string name="or">OR</string>
     <string name="scan">Scan</string>
     <string name="login">Login</string>
-    <string name="name">Name</string>
-    <string name="register">Register</string>
     <string name="blue_bin">Blue Bin</string>
     <string name="description">Description</string>
     <string name="coffee_cup_lid">Coffee Cup lid</string>
