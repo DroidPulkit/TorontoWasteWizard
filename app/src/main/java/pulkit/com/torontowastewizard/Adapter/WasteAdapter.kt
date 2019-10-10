@@ -99,7 +99,7 @@ class WasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<WasteAdapter.Was
             when (v.id) {
                 R.id.search_fav -> {
                     //Do something
-                    val title = wasteArrayList[adapterPosition].keywords
+                    val title = wasteArrayList[adapterPosition].keywords ?: ""
                     val sharedPreferences = v.context.getSharedPreferences("FavSharedPreferences", Context.MODE_PRIVATE)
                     val stringSet = sharedPreferences.getStringSet("fav", null)
                     if (stringSet == null) {

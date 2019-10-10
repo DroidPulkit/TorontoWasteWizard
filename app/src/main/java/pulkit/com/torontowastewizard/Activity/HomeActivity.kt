@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
     internal var strName = ""
 
-    internal var name = Common.getName()
+    internal var name = Common.name
 
     internal var favWasteArrayList = ArrayList<Waste>()
 
