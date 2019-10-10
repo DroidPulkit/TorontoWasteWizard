@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Toronto Waste Wizard</string>
+    <string name="back_to_login">Retour connexion</string>
+    <string name="blue_bin">Bac bleu</string>
+    <string name="coffee_cup_lid">Couvercle de tasse à café</string>
+    <string name="description">La description</string>
+    <string name="email">Email</string>
+    <string name="login">S\'identifier</string>
+    <string name="name">Nom</string>
+    <string name="or">OU</string>
+    <string name="password">Mot de passe</string>
+    <string name="register">S\'inscrire</string>
+    <string name="scan">Analyse</string>
+    <string name="submit">Soumettre</string>
+    <string name="toronto_wizard">Toronto Wizard</string>
+    <string name="waste_management_system">Système de gestion des déchets</string>
+    <string name="waste_name">Nom du déchet</string>
+    <string name="zip_code">Code postal</string>
+</resources>
