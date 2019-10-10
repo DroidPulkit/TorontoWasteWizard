@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Toronto Waste Wizard</string>
+    <string name="toronto_wizard">Toronto Wizard</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="register">Register</string>
+    <string name="back_to_login">Back To Login</string>
+    <string name="data_not_valid">Data not valid</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="registered_failed">Registeration failed, used same email address before</string>
+
 </resources>
