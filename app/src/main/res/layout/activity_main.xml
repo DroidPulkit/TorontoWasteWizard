@@ -18,7 +18,7 @@ android:fitsSystemWindows="true">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toronto Wizard"
+        android:text="@string/toronto_wizard"
         android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
         android:textSize="22sp"
@@ -43,7 +43,7 @@ android:fitsSystemWindows="true">
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +61,7 @@ android:fitsSystemWindows="true">
             android:layout_width="match_parent"
             android:inputType="textPassword"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +73,7 @@ android:fitsSystemWindows="true">
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/textViewCreateAccount"
