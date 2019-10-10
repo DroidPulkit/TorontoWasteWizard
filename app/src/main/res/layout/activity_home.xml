@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:text="Waste Management System"
+                android:text="@string/waste_management_system"
                 android:textColor="@android:color/white"
                 android:textSize="22sp" />
 
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:hint="Waste Name"
+                    android:hint="@string/waste_name"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
@@ -67,7 +67,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:text="Submit" />
+                android:text="@string/submit" />
 
             <TextView
                 android:id="@+id/textViewLogin"
@@ -76,7 +76,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:text="OR"
+                android:text="@string/or"
                 android:textColor="@android:color/white"
                 android:visibility="invisible" />
 
@@ -88,7 +88,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:text="Scan"
+                android:text="@string/scan"
                 android:visibility="invisible" />
 
         </LinearLayout>

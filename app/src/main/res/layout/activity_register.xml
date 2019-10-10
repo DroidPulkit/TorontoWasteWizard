@@ -17,7 +17,7 @@ android:fitsSystemWindows="true">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toronto Wizard"
+        android:text="@string/toronto_wizard"
         android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
         android:textSize="22sp"
@@ -42,7 +42,7 @@ android:fitsSystemWindows="true">
             android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +58,7 @@ android:fitsSystemWindows="true">
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,7 @@ android:fitsSystemWindows="true">
             android:layout_width="match_parent"
             android:inputType="textPassword"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +92,7 @@ android:fitsSystemWindows="true">
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Zip Code"
+            android:hint="@string/zip_code"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +105,7 @@ android:fitsSystemWindows="true">
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="Register" />
+        android:text="@string/register" />
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -114,7 +114,7 @@ android:fitsSystemWindows="true">
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="Back To Login"
+        android:text="@string/back_to_login"
         android:textColor="@android:color/white" />
 </LinearLayout>
 </ScrollView>
