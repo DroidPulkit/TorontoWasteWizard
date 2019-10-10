@@ -31,7 +31,7 @@ tests/proguard-project.txt
 .idea
 *.iml
 build
-/gradle.properties
+#/gradle.properties
 .attach_pid*
 fastlane/Fastfile
 *.hprof
