@@ -25,6 +25,9 @@ import java.util.Map;
 
 import pulkit.com.torontowastewizard.R;
 
+import static pulkit.com.torontowastewizard.Activity.Constants.DOMAIN;
+import static pulkit.com.torontowastewizard.Activity.Constants.REGISTER;
+
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -66,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //Call server to register
                     callServer();
                 } else {
-                    Toast.makeText(this, "Data not valid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.data_not_valid), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.textViewLogin:
@@ -107,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "https://pulkitkumar.me/api/register.php";
+        String url = DOMAIN + REGISTER;
 
         Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
@@ -118,10 +121,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     String success = jsonObject.getString("success");
                     if (success.equals("1")){
                         //Register Successfull
-                        Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registered_successfully), Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Registeration failed, used same email address before", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.registered_failed), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e){
                     e.printStackTrace();
