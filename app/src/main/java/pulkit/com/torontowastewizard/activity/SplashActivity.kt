@@ -1,16 +1,14 @@
-package pulkit.com.torontowastewizard.Activity
+package pulkit.com.torontowastewizard.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.databinding.DataBindingUtil
-
-import pulkit.com.torontowastewizard.R
 import pulkit.com.torontowastewizard.databinding.ActivitySplashBinding
+import pulkit.com.torontowastewizard.R
 
 class SplashActivity : AppCompatActivity() {
 

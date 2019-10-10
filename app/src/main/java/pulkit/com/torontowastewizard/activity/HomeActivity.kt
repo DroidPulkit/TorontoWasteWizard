@@ -1,78 +1,53 @@
-package pulkit.com.torontowastewizard.Activity
+package pulkit.com.torontowastewizard.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
 import android.widget.Toast
-
-import com.android.volley.AuthFailureError
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-
-import org.json.JSONArray
-import org.json.JSONObject
-
 import java.util.ArrayList
-import java.util.HashMap
-
-import pulkit.com.torontowastewizard.Model.Waste
+import pulkit.com.torontowastewizard.model.Waste
 import pulkit.com.torontowastewizard.R
+import pulkit.com.torontowastewizard.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var wasteName: AutoCompleteTextView
-    lateinit var submit: Button
-    lateinit var scan: Button
+    private val TAG = HomeActivity::class.java.simpleName
 
-    internal var strName = ""
+    private var strName = ""
+    private var name = Common.name
+    private var favWasteArrayList = ArrayList<Waste>()
+    private var isLoopFinished = false
 
-    internal var name = Common.name
-
-    internal var favWasteArrayList = ArrayList<Waste>()
-
-    internal var isLoopFinished = false
-    internal var isCallBackFinished = false
+    private lateinit var binding : ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        val myToolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        val myToolbar = binding.myToolbar
         setSupportActionBar(myToolbar)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        wasteName = findViewById(R.id.autoCompleteWasteName)
-        submit = findViewById(R.id.buttonSubmit)
-        scan = findViewById(R.id.buttonScan)
-
         // Create the adapter and set it to the AutoCompleteTextView
-        //I am just saying, this is going to give terible performance, but due
+        //I am just saying, this is going to give terrible performance, but due
         //to time constraints for this assignment, I am skipping the custom adapter
         //So it's going to eat a lot of memory
         //Will improve in future. :)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, name)
-        wasteName.setAdapter(adapter)
+        binding.autoCompleteWasteName.setAdapter(adapter)
 
-        submit.setOnClickListener(this)
-        scan.setOnClickListener(this)
+        binding.buttonSubmit.setOnClickListener(this)
+        binding.buttonScan.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -146,11 +121,11 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    internal fun extractData() {
-        strName = wasteName.text.toString()
+    private fun extractData() {
+        strName = binding.autoCompleteWasteName.text.toString()
     }
 
-    internal fun dataValid(): Boolean {
+    private fun dataValid(): Boolean {
 
         var isValid = true
 
@@ -161,8 +136,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         return isValid
     }
 
-    internal fun callServer() {
-
+    private fun callServer() {
+        //TODO: Do with Retrofit
+        /*
         val queue = Volley.newRequestQueue(this)
 
         val url = "https://pulkitkumar.me/api/search.php"
@@ -220,12 +196,13 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         queue.add(postRequest)
-
-
+        */
     }
 
-    internal fun callServerForFav(keyword: String, index: Int, totalSize: Int) {
+    private fun callServerForFav(keyword: String, index: Int, totalSize: Int) {
 
+        //TODO: Do with retrofit
+        /*
         val i = index
         val t = totalSize
 
@@ -290,10 +267,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         queue.add(postRequest)
+         */
     }
 
-    companion object {
-
-        private val TAG = HomeActivity::class.java.simpleName
-    }
 }

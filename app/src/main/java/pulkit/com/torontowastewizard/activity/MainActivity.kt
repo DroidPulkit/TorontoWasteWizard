@@ -1,60 +1,36 @@
-package pulkit.com.torontowastewizard.Activity
+package pulkit.com.torontowastewizard.activity
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-
-import com.android.volley.AuthFailureError
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-
-import org.json.JSONObject
-
-import java.util.HashMap
-
 import pulkit.com.torontowastewizard.R
+import pulkit.com.torontowastewizard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var createAccount: TextView
-    lateinit var email: EditText
-    lateinit var password: EditText
-    lateinit var login: Button
-    internal var strEmail = ""
-    internal var strPassword = ""
+    private val TAG:String = MainActivity::class.java.simpleName
+
+    private lateinit var binding: ActivityMainBinding
+
+    private var strEmail = ""
+    private var strPassword = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        createAccount = findViewById(R.id.textViewCreateAccount)
-        email = findViewById(R.id.editTextEmail)
-        password = findViewById(R.id.editTextPassword)
-        login = findViewById(R.id.buttonLogin)
+        binding.textViewCreateAccount.text = fromHtml("<font color='#ffffff'>I don't have account yet. </font><font color='#00b8d4'>create one</font>")
 
-        createAccount.text = fromHtml("<font color='#ffffff'>I don't have account yet. </font><font color='#00b8d4'>create one</font>")
-
-        createAccount.setOnClickListener(this)
-        login.setOnClickListener(this)
+        binding.textViewCreateAccount.setOnClickListener(this)
+        binding.buttonLogin.setOnClickListener(this)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -74,12 +50,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    internal fun extractData() {
-        strEmail = email.text.toString()
-        strPassword = password.text.toString()
+    private fun extractData() {
+        strEmail = binding.editTextEmail.text.toString()
+        strPassword = binding.editTextPassword.text.toString()
     }
 
-    internal fun validateData(): Boolean {
+    private fun validateData(): Boolean {
         var isDataRight = true
 
         if (strEmail.isEmpty()) {
@@ -93,8 +69,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return isDataRight
     }
 
-    internal fun callServer() {
-
+    private fun callServer() {
+        //TODO: ADD Retrofit code
+        /*
         val queue = Volley.newRequestQueue(this)
 
         val url = "https://pulkitkumar.me/api/login.php"
@@ -143,22 +120,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         queue.add(postRequest)
-
+         */
 
     }
 
-    companion object {
-
-        private val TAG = MainActivity::class.java.simpleName
-
-        fun fromHtml(html: String): Spanned {
-            val result: Spanned
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-            } else {
-                result = Html.fromHtml(html)
-            }
-            return result
+    private fun fromHtml(html: String): Spanned {
+        val result: Spanned
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            result = Html.fromHtml(html)
         }
+        return result
     }
 }

@@ -1,25 +1,14 @@
-package pulkit.com.torontowastewizard.Activity
+package pulkit.com.torontowastewizard.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import com.android.volley.AuthFailureError
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-
+import android.databinding.DataBindingUtil
 import org.json.JSONObject
-
 import java.util.HashMap
-
 import pulkit.com.torontowastewizard.R
 import pulkit.com.torontowastewizard.databinding.ActivityRegisterBinding
 
@@ -91,6 +80,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun callServer() {
 
+        /*
         val queue = Volley.newRequestQueue(this)
 
         val url = "https://pulkitkumar.me/api/register.php"
@@ -135,7 +125,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         queue.add(postRequest)
-
+        */
 
     }
 }

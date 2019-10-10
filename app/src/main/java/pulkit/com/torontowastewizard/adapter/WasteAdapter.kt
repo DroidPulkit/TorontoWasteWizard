@@ -1,7 +1,6 @@
-package pulkit.com.torontowastewizard.Adapter
+package pulkit.com.torontowastewizard.adapter
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.util.Log
@@ -10,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
 import java.util.ArrayList
-
-import pulkit.com.torontowastewizard.Model.Waste
+import java.util.HashSet
+import pulkit.com.torontowastewizard.model.Waste
 import pulkit.com.torontowastewizard.R
 
-class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapter.FavWasteAdapterViewHolder>() {
+class WasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<WasteAdapter.WasteAdapterViewHolder>() {
 
     internal var wasteArrayList = ArrayList<Waste>()
 
@@ -24,15 +22,13 @@ class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapt
         wasteArrayList = al
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavWasteAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WasteAdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.waste_search_list_layout, parent, false)
 
-        return FavWasteAdapterViewHolder(itemView)
+        return WasteAdapterViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: FavWasteAdapterViewHolder, position: Int) {
-
+    override fun onBindViewHolder(holder: WasteAdapterViewHolder, position: Int) {
         val sTitle = wasteArrayList[position].keywords
         val sDesc = wasteArrayList[position].body
         val sBinName = wasteArrayList[position].category
@@ -58,15 +54,27 @@ class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapt
 
         holder.binImage.setImageResource(sBinImage)
 
-        holder.fav.setImageResource(R.drawable.fav_selected)
-
+        //If anyone asks me in future what kind of things I am doing here, probably god know by then,
+        //sorry on a thigh deadline to make apps so no comments
+        val sharedPreferences = holder.itemView.context.getSharedPreferences("FavSharedPreferences", Context.MODE_PRIVATE)
+        val stringSet = sharedPreferences.getStringSet("fav", null)
+        if (stringSet == null) {
+            holder.fav.setImageResource(R.drawable.fav)
+        } else {
+            Log.d("onLoad", stringSet.toString())
+            if (stringSet.contains(sTitle)) {
+                holder.fav.setImageResource(R.drawable.fav_selected)
+            } else {
+                holder.fav.setImageResource(R.drawable.fav)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return wasteArrayList.size
     }
 
-    inner class FavWasteAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class WasteAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         internal var binImage: ImageView
         internal var fav: ImageView
         internal var binName: TextView
@@ -84,29 +92,34 @@ class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapt
             fav.setOnClickListener(this)
         }
 
-
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.search_fav -> {
                     //Do something
-                    val title = wasteArrayList[adapterPosition].keywords
+                    val title = wasteArrayList[adapterPosition].keywords ?: ""
                     val sharedPreferences = v.context.getSharedPreferences("FavSharedPreferences", Context.MODE_PRIVATE)
                     val stringSet = sharedPreferences.getStringSet("fav", null)
                     if (stringSet == null) {
                         //Doing first time click
-                        Log.d("FavWasteAdapter", "yo this should not have happened!!!")
+                        Log.d("adapter", "In Null part")
+                        val editor = sharedPreferences.edit()
+                        val addStringSet = HashSet<String>()
+                        addStringSet.add(title)
+                        editor.putStringSet("fav", addStringSet)
+                        editor.apply()
+                        fav.setImageResource(R.drawable.fav_selected)
                     } else {
                         Log.d("adapter", "not in Null part")
                         if (stringSet.contains(title)) {
-                            Log.d("FavWasteAdapter", "stringSet Contains title")
                             stringSet.remove(title)
                             fav.setImageResource(R.drawable.fav)
                         } else {
-                            Log.d("FavWasteAdapter", "Why it is not in the sharedpref why?????")
+                            stringSet.add(title)
+                            fav.setImageResource(R.drawable.fav_selected)
                         }
                         val editor = sharedPreferences.edit()
                         editor.putStringSet("fav", stringSet)
-                        editor.commit()
+                        editor.apply()
                     }
                 }
             }
