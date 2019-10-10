@@ -7,14 +7,24 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.databinding.DataBindingUtil
 
 import pulkit.com.torontowastewizard.R
+import pulkit.com.torontowastewizard.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
+    companion object {
+        private val TAG: String = SplashActivity::class.java.simpleName
+        private val SPLASH_TIME_OUT = 3000
+    }
+
+    private lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
@@ -31,10 +41,5 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
         }, SPLASH_TIME_OUT.toLong())
-    }
-
-    companion object {
-
-        private val SPLASH_TIME_OUT = 3000
     }
 }
