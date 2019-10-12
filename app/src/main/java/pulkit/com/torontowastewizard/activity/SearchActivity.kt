@@ -27,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        val wasteArrayList = intent.getSerializableExtra("wasteArrayList") as ArrayList<Waste>
+        val wasteArrayList = intent.getParcelableArrayListExtra<Waste>("wasteArrayList")
         val adapter = WasteAdapter(wasteArrayList)
         val layoutManager = LinearLayoutManager(this)
         val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)

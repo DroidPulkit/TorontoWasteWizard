@@ -1,5 +1,6 @@
 package pulkit.com.torontowastewizard.activity
 
+import android.content.Context
 import android.content.Intent
 import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +9,14 @@ import android.text.Html
 import android.text.Spanned
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import pulkit.com.torontowastewizard.R
 import pulkit.com.torontowastewizard.databinding.ActivityMainBinding
+import pulkit.com.torontowastewizard.datasource.DataSourceProvider
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -17,8 +24,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    private var strEmail = ""
-    private var strPassword = ""
+    private val dataSourceProvider = DataSourceProvider()
+
+    private val userDataSource = dataSourceProvider.userDataSource()
+
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +49,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.buttonLogin -> {
-                extractData()
                 if (validateData()) {
                     //Send data to server to check to login
                     callServer()
@@ -50,19 +59,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun extractData() {
-        strEmail = binding.editTextEmail.text.toString()
-        strPassword = binding.editTextPassword.text.toString()
+
+    private fun getEmail(): String {
+        return binding.editTextEmail.text.toString()
+    }
+
+    private fun getPassword(): String {
+        return binding.editTextEmail.text.toString()
     }
 
     private fun validateData(): Boolean {
         var isDataRight = true
 
-        if (strEmail.isEmpty()) {
+        if (getEmail().isEmpty()) {
             isDataRight = false
-        } else if (strPassword.isEmpty()) {
+        } else if (getPassword().isEmpty()) {
             isDataRight = false
-        } else if (android.util.Patterns.EMAIL_ADDRESS.matcher(strEmail).matches() == false) {
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
             isDataRight = false
         }
 
@@ -70,58 +83,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun callServer() {
-        //TODO: ADD Retrofit code
-        /*
-        val queue = Volley.newRequestQueue(this)
 
-        val url = "https://pulkitkumar.me/api/login.php"
+        scope.launch {
 
-        val listener = Response.Listener<String> { response ->
-            Log.d(TAG, "onResponse: $response")
             try {
-                val jsonObject = JSONObject(response)
-                val success = jsonObject.getString("success")
-                if (success == "1") {
-                    //Register Successfull
-                    Toast.makeText(this@MainActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
-                    val sharedPreferences = getSharedPreferences("loginSharedPreference", Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString("username", strEmail)
-                    editor.apply()
-                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this@MainActivity, "Login failed, check username or password", Toast.LENGTH_SHORT).show()
+                with(Dispatchers.IO) {
+
+                    userDataSource.login(
+                            getEmail(),
+                            getPassword()
+                    )
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
+
+                Toast.makeText(this@MainActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                val sharedPreferences = getSharedPreferences("loginSharedPreference", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("username", getEmail())
+                editor.apply()
+                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            } catch (exception: Exception) {
+                exception.printStackTrace()
+                Toast.makeText(this@MainActivity, "Login failed, check username or password", Toast.LENGTH_SHORT).show()
             }
         }
-
-        val errorListener = Response.ErrorListener { error -> Log.d(TAG, "onErrorResponse: $error") }
-
-        val postRequest = object : StringRequest(Request.Method.POST, url, listener, errorListener) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params["email"] = strEmail
-                params["password"] = strPassword
-
-                return params
-            }
-
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params["Content-Type"] = "application/x-www-form-urlencoded"
-                return params
-            }
-        }
-
-        queue.add(postRequest)
-         */
-
     }
 
     private fun fromHtml(html: String): Spanned {
@@ -132,5 +119,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             result = Html.fromHtml(html)
         }
         return result
+    }
+
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
     }
 }

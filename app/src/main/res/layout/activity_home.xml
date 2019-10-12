@@ -53,7 +53,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:hint="@string/waste_name"
-                        android:inputType="textPersonName"
                         android:textColor="@android:color/white"
                         android:textColorHint="@android:color/white" />
 
