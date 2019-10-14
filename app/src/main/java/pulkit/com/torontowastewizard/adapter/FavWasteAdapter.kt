@@ -1,7 +1,6 @@
 package pulkit.com.torontowastewizard.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,18 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import java.util.ArrayList
-import pulkit.com.torontowastewizard.model.Waste
+import androidx.recyclerview.widget.RecyclerView
 import pulkit.com.torontowastewizard.R
+import pulkit.com.torontowastewizard.model.Waste
 
-class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapter.FavWasteAdapterViewHolder>() {
+class FavWasteAdapter() : RecyclerView.Adapter<FavWasteAdapter.FavWasteAdapterViewHolder>() {
 
-    internal var wasteArrayList = ArrayList<Waste>()
-
-    init {
-        wasteArrayList = al
-    }
-
+    private var wasteArrayList = ArrayList<Waste>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavWasteAdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.waste_search_list_layout, parent, false)
@@ -61,6 +55,12 @@ class FavWasteAdapter(al: ArrayList<Waste>) : RecyclerView.Adapter<FavWasteAdapt
 
     override fun getItemCount(): Int {
         return wasteArrayList.size
+    }
+
+    fun submitList(wasteList: List<Waste>) {
+        this.wasteArrayList.clear()
+        this.wasteArrayList.addAll(wasteList)
+        notifyDataSetChanged()
     }
 
     inner class FavWasteAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
