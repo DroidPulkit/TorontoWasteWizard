@@ -19,5 +19,9 @@
     <string name="blue_bin">Blue Bin</string>
     <string name="description">Description</string>
     <string name="coffee_cup_lid">Coffee Cup lid</string>
+    <string name="error_keyword_search_message">Error finding the keyword</string>
+    <string name="no_waste_added_to_fav">No waste added to Favourite</string>
+    <string name="login_success_message">Login Successfully</string>
+    <string name="login_failed_message">Login failed, check username or password</string>
 
 </resources>
